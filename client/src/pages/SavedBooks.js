@@ -17,7 +17,9 @@ const SavedBooks = () => {
   // const [userData2, { error }] = useQuery(GET_ME);
   // const { loading, data }=useQuery(GET_ME)
   const { loading, data } = useQuery(GET_ME)
-  const user = data?.me ||{};
+  const userData = data?.me ||{};
+  console.log("user data is:")
+  console.log(userData)
   // use this to determine if `useEffect()` hook needs to run again
   // const userDataLength = Object.keys(userData).length;
 
@@ -54,9 +56,9 @@ const SavedBooks = () => {
   const handleDeleteBook = async (bookId) => {
 
     const token = Auth.loggedIn() ? Auth.getToken() : null;
-    console.log(" data is :")
-    console.log(data)
-    console.log(bookId)
+    console.log(" saved books on line 57 is :")
+    // console.log(data)
+    console.log(userData.savedBooks)
     if (!token) {
       return false;
     }
@@ -89,7 +91,8 @@ const SavedBooks = () => {
   if (loading) {
     return <h2>LOADING...</h2>;
   }
-
+  console.log(" i am at user savedbooks")
+  console.log(userData.savedBooks)
   return (
     <>
       <Jumbotron fluid className='text-light bg-dark'>
@@ -99,12 +102,12 @@ const SavedBooks = () => {
       </Jumbotron>
       <Container>
         <h2>
-          {user.savedBooks.length
-            ? `Viewing ${user.savedBooks.length} saved ${user.savedBooks.length === 1 ? 'book' : 'books'}:`
+          {userData.savedBooks.length
+            ? `Viewing ${userData.savedBooks.length} saved ${userData.savedBooks.length === 1 ? 'book' : 'books'}:`
             : 'You have no saved books!'}
         </h2>
         <CardColumns>
-          {user.savedBooks.map((book) => {
+          {userData.savedBooks.map((book) => {
             return (
               <Card key={book.bookId} border='dark'>
                 {book.image ? <Card.Img src={book.image} alt={`The cover for ${book.title}`} variant='top' /> : null}
