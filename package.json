@@ -18,6 +18,8 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "dot-env": "0.0.1",
+    "dotenv": "^10.0.0",
     "if-env": "^1.0.4"
   },
   "devDependencies": {
