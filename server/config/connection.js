@@ -5,6 +5,7 @@ mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost/googlebooks', {
   useUnifiedTopology: true,
   useCreateIndex: true,
   useFindAndModify: true,
-}); 
+}).then (() => console.log("MongoDB connection established..."))
+  .catch((error) => console.error("MongoDB connection failed:", error.message))
 
 module.exports = mongoose.connection;
