@@ -9,7 +9,7 @@ const { ApolloServer } = require('apollo-server-express');
 const { authMiddleware } = require('./utils/auth');
 const app = express();
 
-const PORT = process.env.REACT_APP_PORT || 3001;
+const PORT = process.env.PORT || 3001;
 
 // create a new Apollo server and pass in our schema data
 const server = new ApolloServer({
@@ -23,9 +23,9 @@ server.applyMiddleware({ app });
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
-console.log("process env is:", process.env.REACT_APP_NODE_ENV)
+console.log("process env is:", process.env.NODE_ENV)
 // if we're in production, serve client/build as static assets
-if (process.env.REACT_APP_NODE_ENV === 'production') {
+if (process.env.NODE_ENV === 'production') {
   app.use(express.static(path.join(__dirname, '../client/build')));
   app.get('*', (req, res) => {
     res.sendFile(path.join(__dirname, '../client/build/index.html'));
